@@ -1,15 +1,22 @@
-require 'rake'
-require 'rspec/core/rake_task'
-require_relative 'env/env_config'
+class EnvConfig
+  
+  attr_accessor :options
 
-desc 'Run all test'
-RSpec::Core::RakeTask.new('all') do |t|
-  t.rspec_opts = ['-Ilib', '--format documentation', '--color --tty']
-  t.pattern = 'spec/*/*.rb'
-end
+  def self.config_path=(path)
+    @@config_path = path
+  end
 
-desc "Run specs tagged test"
-RSpec::Core::RakeTask.new('test') do |t|
-  t.rspec_opts = ["-Ilib","--format documentation","--color --tty", "--tag test", "--tag ~todo", "--tag ~known_failure"]
-  t.pattern = 'spec/*/*.rb'
+  def initialize
+
+    unless File.exists?(@@config_path)
+      raise ConfigurationException, "\n\nMissing environment configuration file\n"
+    end
+
+    environment = ENV['env']
+    configs = YAML.load_file(@@config_path)
+    @options = configs[environment]
+  end
 end
+  
+class ConfigurationException < StandardError; end;
+  
