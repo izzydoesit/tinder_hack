@@ -1,0 +1,6 @@
+/scripts/manual
+.rvmrc
+.DS_Store
+*.yml
+*.yaml
+.idea
