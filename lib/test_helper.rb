@@ -1,9 +1,12 @@
 require 'bundler/setup'
 require 'yaml'
-require 'marqeta'
 require 'pry'
 require 'faker'
 
-## Test data
-require_relative '../lib/test_data/data_helper'
-require_relative '../lib/rest_client_wrapper'
+require_relative '../spec/spec_helper'
+
+require_relative '../lib/swipe_page'
+
+require_relative '../env/env_config'
+
+include SwipePage
