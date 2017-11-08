@@ -1,4 +1,4 @@
-require_relative '../lib/test_helper'
+require_relative '../../lib/test_helper'
 
 describe 'Swipe like there\'s no tomorrow', :test do
   
